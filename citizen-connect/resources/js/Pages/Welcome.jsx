@@ -5,6 +5,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import React, { useState } from 'react';
 //import StarIcon from '@mui/icons-material/Star';
 import '../../css/app.css';
@@ -85,14 +86,18 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         >
                             {dossier[selectedActe].map((item, index) => (
                                 <ListItem key={index} disablePadding>
+                                    <ListItemIcon>
+                                    <CheckCircleIcon/>
+                                    </ListItemIcon>
                                     <ListItemText primary={item} />
                                 </ListItem>
                             ))}
                         </List>
-
+                        <Link href={route('login')}>
                             <Button variant="contained" sx={{marginTop:"20px"}}>
                                 Faire une demande
                             </Button>
+                            </Link>
                             </Paper>
                             <Paper elevation={3} sx={{padding:"30px", margin:"10px 50px", height:"450px", maxWidth:"500px"}}>
                             <Typography variant="h5" component="h2">
@@ -108,21 +113,26 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <ListItem disablePadding>
                                     
                                     <ListItemIcon>
-                                    
+                                    <CheckCircleIcon/>
                                     </ListItemIcon>
                                     <ListItemText primary="Carte d'identité CIN du demandeur" />
                                 
                                 </ListItem>
                                 <ListItem disablePadding>
-                                    
+                                <ListItemIcon>
+                                    <CheckCircleIcon/>
+                                    </ListItemIcon>
                                     <ListItemText inset primary="Scan du document à legaliser (CIN,acte d'état civil,etc....)" />
                                 
                                 </ListItem>
                                 </List>
 
-                            <Button variant="contained" sx={{marginTop:"60px"}}>
+                                <Link href={route('login')}>
+                                <Button variant="contained" sx={{marginTop:"60px"}}>
                                 Faire une demande
                             </Button>
+                                </Link>
+                            
                             </Paper>
                           
                             </Stack>

@@ -9,6 +9,7 @@ use App\Http\Controllers\acteNaissanceController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\citoyenController;
 use App\Http\Controllers\communeController;
+use App\Http\Controllers\RouteController;
 use App\Http\Controllers\demandeController;
 use App\Http\Controllers\legalisationController;
 use App\Http\Controllers\SmsController;
@@ -89,6 +90,13 @@ Route::delete('/deleteLegalisation/{id}', [legalisationController::class, 'delet
 Route::delete('/deleteActeDeces/{id}', [acteDecesController::class, 'delete']);
 Route::delete('/deleteActeMariage/{id}', [acteMariageController::class, 'delete']);
 Route::delete('/deleteActeNaissance/{id}', [acteNaissanceController::class, 'delete']);
+
+
+Route::get('/test', [RouteController::class, 'index']);
+Route::get('/legal', [RouteController::class, 'legal']);
+Route::get('/demande/acte-de-naissance', [RouteController::class, 'naissance']);
+Route::get('/demande/acte-de-mariage', [RouteController::class, 'mariage']);
+Route::get('/demande/acte-de-décès', [RouteController::class, 'deces']);
 
 
 Route::middleware('auth')->group(function () {

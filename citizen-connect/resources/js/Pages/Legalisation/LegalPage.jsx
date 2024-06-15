@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import TextInput from '@/Components/TextInput';
 import { Paper, Stack, Typography, TextField, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid } from '@mui/material';
 
 export default function LegalPage({ auth, citoyen }) {
     const [cinFile, setCinFile] = useState(null);
     const [docFile, setDocFile] = useState(null);
+    const [qte, setQte] = useState(1);
     const [residenceFile, setResidenceFile] = useState(null);
     const [open, setOpen] = useState(false);
     const [codeRef, setCodeRef] = useState(['', '', '', '', '', '']);
     
-    const { post, reset } = useForm({
+    /*const { post, reset } = useForm({
         cin: null,
         docScan:null,
         residence: null,
         citoyen_id: citoyen.idCitoyen,
         raison: '',
-    });
+    });*/
 
     const handleCinChange = (e) => {
         setCinFile(e.target.files[0]);
@@ -46,18 +48,46 @@ export default function LegalPage({ auth, citoyen }) {
         }
 
         const formData = new FormData();
+        formData.append('fichierLegaliser', docFile);
+        formData.append('CRLegal', residenceFile);
+        formData.append('citoyen_id', citoyen.idCitoyen);
+        
+        
+        const formData2 = new FormData();
         formData.append('cin', cinFile);
+
+        const formData3 = new FormData();
         formData.append('docScan', docFile);
         formData.append('residence', residenceFile);
         formData.append('citoyen_id', citoyen.idCitoyen);
         formData.append('raison', 'legalisation');
+        
+       
 
-        post(route('legalisation.store'), formData, {
+        post(route('/createActe'), formData2, {
+            forceFormData: true,
+            onSuccess: () => {
+                setCinFile(null);
+              
+            },
+        });
+        post(route('/createLegalisation'), formData, {
             forceFormData: true,
             onSuccess: () => {
                 setCinFile(null);
                 setResidenceFile(null);
                 setCodeRef(['', '', '', '', '', '']);
+                reset('cin', 'residence', 'additional_info');
+              
+            },
+        });
+
+        post(route('/createDemande'), formData3, {
+            forceFormData: true,
+            onSuccess: () => {
+                setCinFile(null);
+                setResidenceFile(null);
+               
                 reset('cin', 'residence', 'additional_info');
                 handleClose();
             },
@@ -117,6 +147,17 @@ export default function LegalPage({ auth, citoyen }) {
                                     inputProps={{ accept: 'image/*,application/pdf' }}
                                     label="Document a legaliser"
                                 />
+
+                    <TextInput
+                        id="qte"
+                        type="number"
+                        name="qte"
+                        value={qte}
+                        
+                        autoComplete="1"
+                        
+                        onChange={(e) => setQte( e.target.value)}
+                    />
                                 <Button type="button" variant="contained" onClick={handleOpen}>
                                     Valider la demande
                                 </Button>

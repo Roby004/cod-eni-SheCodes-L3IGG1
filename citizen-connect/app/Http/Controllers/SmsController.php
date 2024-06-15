@@ -15,6 +15,9 @@ class SmsController extends Controller
         );
 
         $message = $response->current();
+        $code = AuthController::generateRandomNumber();
+        session()->put('session_code', $code);
+        $codeP = "Code auth: " .  session('session_code');
 
         if ($message->getStatus() == 0) {
             echo "The message was sent successfully\n";

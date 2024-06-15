@@ -41,9 +41,11 @@ export default function AccueilAdmin() {
                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ab libero dolore blanditiis ipsa explicabo nostrum quisquam aliquam, fugiat non nam nobis eligendi eius laudantium vitae laboriosam culpa assumenda ducimus.</p>
 
             </Stack>
+            <Link href='/test'>
             <Button variant="contained" sx={{marginTop:"60px"}}>
                                 Se connecter
                             </Button>
+            </Link>
             </Stack>
 
            
