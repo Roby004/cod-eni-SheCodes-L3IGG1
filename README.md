@@ -7,3 +7,4 @@ Section admin:
 Section citoyen:
 /
 /legalisation/{user}
+demande acte : /demande/acte-de-naissance
