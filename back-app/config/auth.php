@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'citoyen',
         'passwords' => 'users',
     ],
 
@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'citoyen' => [
+            'driver' => 'session',
+            'provider' => 'citoyens',
+        ],
     ],
 
     /*
@@ -63,6 +67,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'citoyens' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Citoyen::class,
         ],
 
         // 'users' => [
